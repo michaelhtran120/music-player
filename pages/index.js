@@ -1,9 +1,10 @@
 import Head from 'next/head';
 // import Image from 'next/image';
 import AudioPlayer from '../components/AudioPlayer/AudioPlayer';
+import { server } from '../config/index';
 import styles from '../styles/Home.module.css';
 
-export default function Home() {
+export default function Home({ songs }) {
   return (
     <div>
       <Head>
@@ -13,8 +14,26 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <AudioPlayer />
+        <AudioPlayer songs={songs} />
       </main>
     </div>
   );
+}
+
+export async function getStaticProps() {
+  const res = await fetch(`${server}/api/songs`);
+  const songs = await res.json();
+  console.log(songs);
+
+  if (songs) {
+    return {
+      props: {
+        songs: songs,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
 }
