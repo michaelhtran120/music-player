@@ -1,15 +1,16 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import song1 from '../../assets/ArsGratiaArtis.mp3';
+import { musicData } from '../../data';
 import styles from '../../styles/AudioPlayer.module.scss';
 
 import { BsPlay, BsPause, BsSkipBackward, BsSkipForward } from 'react-icons/bs';
 import ProgressBar from './ProgressBar';
-import { calculateTime } from '../../Utils/calculateTime';
 
 function AudioPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [totalTime, setTotalTime] = useState(null);
   const [currentTime, setCurrentTime] = useState(0);
+  const [songIndex, setSongIndex] = useState(0);
 
   const audioPlayerRef = useRef();
   const progressBarRef = useRef();
@@ -65,7 +66,11 @@ function AudioPlayer() {
 
   return (
     <div className={styles.audioPlayer}>
-      <audio ref={audioPlayerRef} src={song1}></audio>
+      <audio ref={audioPlayerRef} src={musicData[songIndex].file}></audio>
+      <div className={styles.songInfo}>
+        <p>{musicData[songIndex].artist}</p> <span> - </span>
+        <p>{musicData[songIndex].title}</p>
+      </div>
       <div className={styles.audioController}>
         <button className={styles.backwardButton}>
           <BsSkipBackward />

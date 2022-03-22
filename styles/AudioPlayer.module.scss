@@ -13,27 +13,40 @@
     flex-direction: column;
   }
 
+  .songInfo {
+    color: $white;
+    padding-right: 10px;
+    span {
+      display: none;
+      @media screen and (max-width: 500px) {
+        display: initial;
+      }
+    }
+    p {
+      @media screen and (max-width: 500px) {
+        display: inline;
+      }
+    }
+  }
+
   .audioController {
     display: flex;
     align-items: center;
-    margin: 0 30px 0 10px;
-    .backwardButton {
+    margin: 0 30px 0 30px;
+    @media screen and (max-width: 500px) {
+      margin: 0;
+      padding: 0;
+      order: 1;
     }
     .playPauseButton {
       padding-bottom: 0px;
       font-size: 2.5rem;
-    }
-    .forwardButton {
     }
     button {
       background: none;
       border: none;
       font-size: 1.5rem;
       color: $primary;
-    }
-    @media screen and (max-width: 500px) {
-      margin: 0 0 10px 0;
-      padding: 20px 0px 0px 0px
     }
   }
 
@@ -44,7 +57,7 @@
     justify-content: flex-start;
 
     @media screen and (max-width: 500px) {
-      padding-bottom: 20px
+      padding-bottom: 20px;
     }
     .currentTime,
     .totalTime {
