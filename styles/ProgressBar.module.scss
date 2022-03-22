@@ -1,0 +1,68 @@
+@use './index' as *;
+
+.progressBarAndTime {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  @media screen and (max-width: 500px) {
+    padding-bottom: 20px;
+  }
+  .currentTime,
+  .totalTime {
+    position: relative;
+    display: block;
+    color: $white;
+    font-family: sans-serif;
+  }
+  .currentTime {
+    margin-right: 10px;
+  }
+  .totalTime {
+    margin-left: 10px;
+  }
+
+  .progressBar {
+    --progressWidth: 0;
+    --progressBarHeight: 10px;
+
+    appearance: none;
+    width: 100%;
+    position: relative;
+    background: $secondary;
+    border-radius: 10px;
+    height: var(--progressBarHeight);
+    outline: none;
+    z-index: 0;
+
+    &::before {
+      content: '';
+      height: var(--progressBarHeight);
+      background-color: $primary;
+      width: var(--progressWidth);
+      border-radius: 10px 0 0 10px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      cursor: pointer;
+    }
+
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      background-color: clr(primary, light);
+      border-radius: 50%;
+      position: relative;
+      z-index: 3;
+      cursor: pointer;
+
+      &:active {
+        transform: scale(1.2);
+        background-color: clr(primary, dark);
+      }
+    }
+  }
+}

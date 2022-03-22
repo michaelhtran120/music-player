@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import song1 from '../assets/ArsGratiaArtis.mp3';
-import styles from '../styles/AudioPlayer.module.scss';
+import song1 from '../../assets/ArsGratiaArtis.mp3';
+import styles from '../../styles/AudioPlayer.module.scss';
 
 import { BsPlay, BsPause, BsSkipBackward, BsSkipForward } from 'react-icons/bs';
+import ProgressBar from './ProgressBar';
+import { calculateTime } from '../../Utils/calculateTime';
 
 function AudioPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -61,14 +63,6 @@ function AudioPlayer() {
     }
   }, [currentTime, totalTime]);
 
-  const calculateTime = (sec) => {
-    const minutes = Math.floor(sec / 60);
-    const returnedMinutes = (minutes) => (minutes < 10 ? `0${minutes}` : `${minutes}`);
-    const seconds = sec % 60;
-    const returnedSeconds = (seconds) => (seconds < 10 ? `0${seconds}` : `${seconds}`);
-    return `${returnedMinutes(minutes)}:${returnedSeconds(seconds)}`;
-  };
-
   return (
     <div className={styles.audioPlayer}>
       <audio ref={audioPlayerRef} src={song1}></audio>
@@ -83,19 +77,12 @@ function AudioPlayer() {
           <BsSkipForward />
         </button>
       </div>
-      {/* time display */}
-      <div className={styles.currentTime}>{calculateTime(currentTime)}</div>
-      <div>
-        <input
-          type='range'
-          className={styles.progressBar}
-          ref={progressBarRef}
-          defaultValue='0'
-          onChange={handleRangeChange}
-        />
-      </div>
-      {/* duration */}
-      <div className={styles.totalTime}>{totalTime ? calculateTime(totalTime) : '00:00'}</div>
+      <ProgressBar
+        handleRangeInputChange={handleRangeChange}
+        currentTime={currentTime}
+        totalTime={totalTime}
+        ref={progressBarRef}
+      />
     </div>
   );
 }
