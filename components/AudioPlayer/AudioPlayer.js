@@ -11,7 +11,7 @@ function AudioPlayer({ songs }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [totalTime, setTotalTime] = useState(null);
   const [currentTime, setCurrentTime] = useState(0);
-  const [songIndex, setSongIndex] = useState(1);
+  const [songIndex, setSongIndex] = useState(0);
 
   const audioPlayerRef = useRef();
   const progressBarRef = useRef();
@@ -77,16 +77,19 @@ function AudioPlayer({ songs }) {
 
   return (
     <>
-      <div className={styles.audioPlayer}>
-        <audio
-          ref={audioPlayerRef}
-          src={`https://docs.google.com/uc?export=download&id=${songs[songIndex]?.driveId}`}
-        ></audio>
+      <div className={styles.marqueeWrapper}>
         <div className={isPlaying ? styles.songInfo : styles.songInfoDisabled}>
           <span>Now Playing - </span>
           <span>{songs[songIndex]?.artist}</span> <span> - </span>
           <span>{songs[songIndex]?.title}</span>
         </div>
+      </div>
+      <div className={styles.audioPlayer}>
+        <audio
+          ref={audioPlayerRef}
+          src={`https://docs.google.com/uc?export=download&id=${songs[songIndex]?.driveId}`}
+        ></audio>
+
         <div className={styles.audioController}>
           <button className={styles.backwardButton}>
             <BsSkipBackward />
