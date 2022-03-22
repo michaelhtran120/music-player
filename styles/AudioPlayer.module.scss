@@ -1,5 +1,52 @@
 @use './index' as *;
 
+.songInfo {
+  color: $black;
+  padding-right: 10px;
+  position: absolute;
+  top: -20px;
+  width: 100%;
+  -moz-transform: translateX(-100%);
+  -webkit-transform: translateX(-100%);
+  transform: translateX(-100%);
+  /* Apply animation to this element */
+  -moz-animation: songInfoMarquee 20s linear infinite;
+  -webkit-animation: songInfoMarquee 20s linear infinite;
+  animation: songInfoMarquee 20s linear infinite;
+  @-moz-keyframes songInfoMarquee {
+    0% {
+      -moz-transform: translateX(-25%);
+    }
+    100% {
+      -moz-transform: translateX(100%);
+    }
+  }
+  @-webkit-keyframes songInfoMarquee {
+    0% {
+      -webkit-transform: translateX(-25%);
+    }
+    100% {
+      -webkit-transform: translateX(100%);
+    }
+  }
+  @keyframes songInfoMarquee {
+    0% {
+      -moz-transform: translateX(-25%); /* Firefox bug fix */
+      -webkit-transform: translateX(-25%); /* Firefox bug fix */
+      transform: translateX(-25%);
+    }
+    100% {
+      -moz-transform: translateX(100%); /* Firefox bug fix */
+      -webkit-transform: translateX(100%); /* Firefox bug fix */
+      transform: translateX(100%);
+    }
+  }
+}
+
+.songInfoDisabled {
+  display: none;
+}
+
 .audioPlayer {
   position: absolute;
   bottom: 0;
@@ -8,25 +55,10 @@
   width: 100%;
   padding: 0 20px;
   background-color: $black;
+  // overflow: hidden;
 
   @media screen and (max-width: 500px) {
     flex-direction: column;
-  }
-
-  .songInfo {
-    color: $white;
-    padding-right: 10px;
-    span {
-      display: none;
-      @media screen and (max-width: 500px) {
-        display: initial;
-      }
-    }
-    p {
-      @media screen and (max-width: 500px) {
-        display: inline;
-      }
-    }
   }
 
   .audioController {

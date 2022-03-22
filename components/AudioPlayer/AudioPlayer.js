@@ -1,16 +1,17 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import song1 from '../../assets/ArsGratiaArtis.mp3';
 import { musicData } from '../../data';
+import { server } from '../../config/index';
 import styles from '../../styles/AudioPlayer.module.scss';
 
 import { BsPlay, BsPause, BsSkipBackward, BsSkipForward } from 'react-icons/bs';
 import ProgressBar from './ProgressBar';
 
-function AudioPlayer() {
+function AudioPlayer({ songs }) {
+  // console.log(songs);
   const [isPlaying, setIsPlaying] = useState(false);
   const [totalTime, setTotalTime] = useState(null);
   const [currentTime, setCurrentTime] = useState(0);
-  const [songIndex, setSongIndex] = useState(0);
+  const [songIndex, setSongIndex] = useState(1);
 
   const audioPlayerRef = useRef();
   const progressBarRef = useRef();
@@ -18,6 +19,16 @@ function AudioPlayer() {
 
   const handlePlayPause = () => {
     setIsPlaying((prevValue) => !prevValue);
+  };
+
+  const handleNextClick = () => {
+    setSongIndex((prev) => {
+      if (prev === songs.length - 1) {
+        return 0;
+      } else {
+        return prev + 1;
+      }
+    });
   };
 
   const handleRangeChange = () => {
@@ -65,30 +76,36 @@ function AudioPlayer() {
   }, [currentTime, totalTime]);
 
   return (
-    <div className={styles.audioPlayer}>
-      <audio ref={audioPlayerRef} src={musicData[songIndex].file}></audio>
-      <div className={styles.songInfo}>
-        <p>{musicData[songIndex].artist}</p> <span> - </span>
-        <p>{musicData[songIndex].title}</p>
+    <>
+      <div className={styles.audioPlayer}>
+        <audio
+          ref={audioPlayerRef}
+          src={`https://docs.google.com/uc?export=download&id=${songs[songIndex]?.driveId}`}
+        ></audio>
+        <div className={isPlaying ? styles.songInfo : styles.songInfoDisabled}>
+          <span>Now Playing - </span>
+          <span>{songs[songIndex]?.artist}</span> <span> - </span>
+          <span>{songs[songIndex]?.title}</span>
+        </div>
+        <div className={styles.audioController}>
+          <button className={styles.backwardButton}>
+            <BsSkipBackward />
+          </button>
+          <button onClick={handlePlayPause} className={styles.playPauseButton}>
+            {isPlaying ? <BsPause /> : <BsPlay />}
+          </button>
+          <button className={styles.forwardButton} onClick={handleNextClick}>
+            <BsSkipForward />
+          </button>
+        </div>
+        <ProgressBar
+          handleRangeInputChange={handleRangeChange}
+          currentTime={currentTime}
+          totalTime={totalTime}
+          ref={progressBarRef}
+        />
       </div>
-      <div className={styles.audioController}>
-        <button className={styles.backwardButton}>
-          <BsSkipBackward />
-        </button>
-        <button onClick={handlePlayPause} className={styles.playPauseButton}>
-          {isPlaying ? <BsPause /> : <BsPlay />}
-        </button>
-        <button className={styles.forwardButton}>
-          <BsSkipForward />
-        </button>
-      </div>
-      <ProgressBar
-        handleRangeInputChange={handleRangeChange}
-        currentTime={currentTime}
-        totalTime={totalTime}
-        ref={progressBarRef}
-      />
-    </div>
+    </>
   );
 }
 
