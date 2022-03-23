@@ -27,6 +27,9 @@ function AudioPlayer({ songs, isPlaying, setIsPlaying, songIndex, handleChangeSo
       }
     });
     changePlayerCurrentTime();
+    if (!isPlaying) {
+      handlePlayPause();
+    }
   };
 
   const handleRangeChange = () => {
@@ -43,9 +46,11 @@ function AudioPlayer({ songs, isPlaying, setIsPlaying, songIndex, handleChangeSo
   }, [totalTime]);
 
   const whilePlaying = () => {
-    progressBarRef.current.value = audioPlayerRef.current.currentTime;
-    changePlayerCurrentTime();
-    animationRef.current = requestAnimationFrame(whilePlaying);
+    if (audioPlayerRef.current !== null && isPlaying) {
+      progressBarRef.current.value = audioPlayerRef.current.currentTime;
+      changePlayerCurrentTime();
+      animationRef.current = requestAnimationFrame(whilePlaying);
+    }
   };
 
   useEffect(() => {
@@ -60,11 +65,8 @@ function AudioPlayer({ songs, isPlaying, setIsPlaying, songIndex, handleChangeSo
   }, [isPlaying, whilePlaying]);
 
   useEffect(() => {
-    console.log(songs);
-    console.log(songIndex);
     const seconds = Math.floor(songs[songIndex].duration);
     setTotalTime(seconds);
-    console.log(totalTime);
 
     // setting max of the input range.
     progressBarRef.current.max = seconds;
