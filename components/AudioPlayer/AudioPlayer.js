@@ -1,28 +1,25 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { musicData } from '../../data';
-import { server } from '../../config/index';
 import styles from '../../styles/AudioPlayer.module.scss';
 
 import { BsPlay, BsPause, BsSkipBackward, BsSkipForward } from 'react-icons/bs';
 import ProgressBar from './ProgressBar';
 
-function AudioPlayer({ songs }) {
-  // console.log(songs);
-  const [isPlaying, setIsPlaying] = useState(false);
+function AudioPlayer({ songs, isPlaying, setIsPlaying, songIndex, handleChangeSong }) {
+  // const [isPlaying, setIsPlaying] = useState(false);
   const [totalTime, setTotalTime] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
-  const [songIndex, setSongIndex] = useState(0);
 
   const audioPlayerRef = useRef();
   const progressBarRef = useRef();
   const animationRef = useRef();
+  const firstUpdate = useRef(true);
 
   const handlePlayPause = () => {
     setIsPlaying((prevValue) => !prevValue);
   };
 
   const nextSong = () => {
-    setSongIndex((prev) => {
+    handleChangeSong((prev) => {
       if (prev === songs.length - 1) {
         return 0;
       } else {
@@ -74,7 +71,7 @@ function AudioPlayer({ songs }) {
   }, [songIndex]);
 
   useEffect(() => {
-    if (currentTime == totalTime) {
+    if (currentTime == totalTime && !firstUpdate.current) {
       nextSong();
     }
   }, [currentTime, totalTime]);

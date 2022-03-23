@@ -1,10 +1,26 @@
 import Head from 'next/head';
-// import Image from 'next/image';
+
+import React, { useState } from 'react';
+
 import AudioPlayer from '../components/AudioPlayer/AudioPlayer';
+import Playlist from '../components/Playlist/Playlist';
+
 import { server } from '../config/index';
+
 import styles from '../styles/Home.module.css';
 
 export default function Home({ songs }) {
+  const [songIndex, setSongIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const changeSong = (id) => {
+    if (!isPlaying) {
+      setSongIndex(id);
+      setIsPlaying((prev) => !prev);
+    }
+    setSongIndex(id);
+  };
+
   return (
     <div>
       <Head>
@@ -14,7 +30,14 @@ export default function Home({ songs }) {
       </Head>
 
       <main className={styles.main}>
-        <AudioPlayer songs={songs} />
+        <Playlist songs={songs} handleChangeSong={changeSong} />
+        <AudioPlayer
+          songs={songs}
+          songIndex={songIndex}
+          handleChangeSong={setSongIndex}
+          isPlaying={isPlaying}
+          setIsPlaying={setIsPlaying}
+        />
       </main>
     </div>
   );
