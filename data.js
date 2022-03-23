@@ -5,6 +5,7 @@ export const musicData = [
     artist: 'CJ Trillo',
     genre: 'hip hop',
     driveId: '1f-D-QIbqzQN_TuNUNKpmpDY4gypkQmrZ',
+    duration: 237,
   },
   {
     id: '2',
@@ -12,6 +13,7 @@ export const musicData = [
     artist: 'Siik',
     genre: 'hip hop',
     driveId: '1gLeGhBeKfeX9K1d6VXs0igEEW64MZG_i',
+    duration: 276,
   },
   {
     id: '3',
@@ -19,6 +21,7 @@ export const musicData = [
     artist: 'Louis Futon',
     genre: 'Electro Pop',
     driveId: '19X-GCcEvfo85yeME8oLLGoA9k8FslI5J',
+    duration: 220,
   },
   {
     id: '4',
@@ -26,5 +29,6 @@ export const musicData = [
     artist: 'Fenech-Soler',
     genre: ' Indie Pop, Indietronica',
     driveId: '1Y8lIIbX3Kw_WNGBhb3h6OBfVp1thzDYZ',
+    duration: 341,
   },
 ];

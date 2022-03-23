@@ -9,7 +9,7 @@ import ProgressBar from './ProgressBar';
 function AudioPlayer({ songs }) {
   // console.log(songs);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [totalTime, setTotalTime] = useState(null);
+  const [totalTime, setTotalTime] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [songIndex, setSongIndex] = useState(0);
 
@@ -21,7 +21,7 @@ function AudioPlayer({ songs }) {
     setIsPlaying((prevValue) => !prevValue);
   };
 
-  const handleNextClick = () => {
+  const nextSong = () => {
     setSongIndex((prev) => {
       if (prev === songs.length - 1) {
         return 0;
@@ -29,6 +29,7 @@ function AudioPlayer({ songs }) {
         return prev + 1;
       }
     });
+    changePlayerCurrentTime();
   };
 
   const handleRangeChange = () => {
@@ -39,16 +40,16 @@ function AudioPlayer({ songs }) {
   const changePlayerCurrentTime = useCallback(() => {
     progressBarRef.current.style.setProperty(
       '--progressWidth',
-      `${(progressBarRef.current.value / totalTime) * 100}%`,
+      `${Math.ceil((progressBarRef.current.value / totalTime) * 100)}%`,
     );
     setCurrentTime(progressBarRef.current.value);
   }, [totalTime]);
 
-  const whilePlaying = useCallback(() => {
+  const whilePlaying = () => {
     progressBarRef.current.value = audioPlayerRef.current.currentTime;
     changePlayerCurrentTime();
     animationRef.current = requestAnimationFrame(whilePlaying);
-  }, [changePlayerCurrentTime]);
+  };
 
   useEffect(() => {
     if (isPlaying) {
@@ -56,22 +57,25 @@ function AudioPlayer({ songs }) {
       animationRef.current = requestAnimationFrame(whilePlaying);
     } else {
       audioPlayerRef.current.pause();
-      cancelAnimationFrame(animationRef.current);
+      animationRef.current = requestAnimationFrame(whilePlaying);
+      // cancelAnimationFrame(animationRef.current);
     }
   }, [isPlaying, whilePlaying]);
 
   useEffect(() => {
-    const seconds = Math.floor(audioPlayerRef.current.duration);
+    console.log(songs);
+    console.log(songIndex);
+    const seconds = Math.floor(songs[songIndex].duration);
     setTotalTime(seconds);
+    console.log(totalTime);
 
     // setting max of the input range.
     progressBarRef.current.max = seconds;
-  }, [audioPlayerRef?.current?.loadedmetadata, audioPlayerRef?.current?.readyState]);
+  }, [songIndex]);
 
   useEffect(() => {
     if (currentTime == totalTime) {
-      handlePlayPause();
-      audioPlayerRef.current.currentTime = 0;
+      nextSong();
     }
   }, [currentTime, totalTime]);
 
@@ -97,7 +101,7 @@ function AudioPlayer({ songs }) {
           <button onClick={handlePlayPause} className={styles.playPauseButton}>
             {isPlaying ? <BsPause /> : <BsPlay />}
           </button>
-          <button className={styles.forwardButton} onClick={handleNextClick}>
+          <button className={styles.forwardButton} onClick={nextSong}>
             <BsSkipForward />
           </button>
         </div>

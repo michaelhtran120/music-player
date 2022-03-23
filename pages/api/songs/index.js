@@ -8,6 +8,7 @@ export default function handler(req, res) {
       artist: song.artist,
       genre: song.genre,
       driveId: song.driveId,
+      duration: song.duration,
     };
   });
   res.status(200).json(musicInfo);
