@@ -8,6 +8,8 @@ function AudioPlayer({ songs, isPlaying, setIsPlaying, songIndex, handleChangeSo
   // const [isPlaying, setIsPlaying] = useState(false);
   const [totalTime, setTotalTime] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
+  const [isVolumeOpen, setIsVolumeOpen] = useState(false);
+  const [volumeValue, setVolumeValue] = useState('100');
 
   const audioPlayerRef = useRef();
   const progressBarRef = useRef();
@@ -40,7 +42,20 @@ function AudioPlayer({ songs, isPlaying, setIsPlaying, songIndex, handleChangeSo
 
   const handleVolumeRangeChange = () => {
     audioPlayerRef.current.volume = parseInt(audioPlayerVolumeRef.current.value) / 100;
+    audioPlayerVolumeRef.current.style.setProperty(
+      '--volumeWidth',
+      `${Math.ceil(audioPlayerRef.current.volume * 125)}px`,
+    );
+    setVolumeValue(audioPlayerRef.current.volume * 100);
   };
+  useEffect(() => {
+    if (audioPlayerVolumeRef?.current) {
+      audioPlayerVolumeRef.current.style.setProperty(
+        '--volumeWidth',
+        `${Math.ceil(audioPlayerRef.current.volume * 125)}px`,
+      );
+    }
+  }, [isVolumeOpen]);
 
   const changePlayerCurrentTime = useCallback(() => {
     progressBarRef.current.style.setProperty(
@@ -115,12 +130,17 @@ function AudioPlayer({ songs, isPlaying, setIsPlaying, songIndex, handleChangeSo
           totalTime={totalTime}
           ref={progressBarRef}
         />
-        <input
-          type='range'
-          ref={audioPlayerVolumeRef}
-          defaultValue={1}
-          onChange={handleVolumeRangeChange}
-        />
+        <div className={styles.volumeWrapper}>
+          <button onClick={() => setIsVolumeOpen((prev) => !prev)}>Volume</button>
+          {isVolumeOpen ? (
+            <input
+              type='range'
+              ref={audioPlayerVolumeRef}
+              onChange={handleVolumeRangeChange}
+              value={volumeValue}
+            />
+          ) : null}
+        </div>
       </div>
     </>
   );
