@@ -12,6 +12,7 @@ function AudioPlayer({ songs, isPlaying, setIsPlaying, songIndex, handleChangeSo
   const audioPlayerRef = useRef();
   const progressBarRef = useRef();
   const animationRef = useRef();
+  const audioPlayerVolumeRef = useRef();
   const firstUpdate = useRef(true);
 
   const handlePlayPause = () => {
@@ -32,9 +33,13 @@ function AudioPlayer({ songs, isPlaying, setIsPlaying, songIndex, handleChangeSo
     }
   };
 
-  const handleRangeChange = () => {
+  const handleProgressRangeChange = () => {
     audioPlayerRef.current.currentTime = progressBarRef.current.value;
     changePlayerCurrentTime();
+  };
+
+  const handleVolumeRangeChange = () => {
+    audioPlayerRef.current.volume = parseInt(audioPlayerVolumeRef.current.value) / 100;
   };
 
   const changePlayerCurrentTime = useCallback(() => {
@@ -105,10 +110,16 @@ function AudioPlayer({ songs, isPlaying, setIsPlaying, songIndex, handleChangeSo
           </button>
         </div>
         <ProgressBar
-          handleRangeInputChange={handleRangeChange}
+          handleRangeInputChange={handleProgressRangeChange}
           currentTime={currentTime}
           totalTime={totalTime}
           ref={progressBarRef}
+        />
+        <input
+          type='range'
+          ref={audioPlayerVolumeRef}
+          defaultValue={1}
+          onChange={handleVolumeRangeChange}
         />
       </div>
     </>
