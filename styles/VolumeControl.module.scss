@@ -4,6 +4,12 @@
   position: relative;
   margin: 0px 0px 0px 20px;
 
+  @media screen and (max-width: 500px) {
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+  }
+
   .volumeIcon {
     margin-left: 20px;
   }

@@ -12,7 +12,7 @@
 }
 
 .songInfo {
-  color: $black;
+  color: $white;
   padding-right: 10px;
   position: absolute;
   width: 100%;
@@ -125,53 +125,6 @@
       border: none;
       font-size: 1.5rem;
       color: $primary;
-    }
-  }
-
-  .volumeWrapper {
-    position: relative;
-    margin: 0px 10px;
-
-    input {
-      --volumeWidth: 125px;
-      
-      appearance: none;
-      min-width: 125px;
-      position: absolute;
-      background: $secondary;
-      height: 10px;
-      border-radius: 10px;
-      left: 0;
-      transform: translateX(-35px) translateY(-80px) rotate(270deg);
-      &::before {
-        content: '';
-        height: 10px;
-        background-color: $primary;
-        width: var(--volumeWidth);
-        border-radius: 10px;
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 1;
-        cursor: pointer;
-      }
-
-      &::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        width: 9px;
-        height: 18px;
-        border: 1px solid $black;
-        background-color: clr(primary, light);
-        border-radius: 25%;
-        position: relative;
-        z-index: 3;
-        cursor: pointer;
-
-        &:active {
-          transform: scale(1.2);
-          background-color: clr(primary, dark);
-        }
-      }
     }
   }
 }
