@@ -1,12 +1,26 @@
+@use './index' as *;
+
 .nav {
-  display: flex;
-  justify-self: flex-start;
-  align-items: center;
   padding: 0 20px;
+  color: $white;
+  background-color: $black;
+  * {
+    color: $white;
+  }
   ul {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     li {
       display: inline;
-      margin-right: 20px;
+      margin: 0 10px;
+    }
+    a {
+      &:hover {
+        color: clr(primary, light);
+      }
     }
   }
 }

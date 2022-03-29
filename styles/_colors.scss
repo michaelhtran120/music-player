@@ -17,6 +17,14 @@ $colors: (
     light: lighten($secondary, $lighten),
     dark: darken($secondary, $darken),
   ),
+  black: (
+    base: $black,
+    light: lighten($black, $lighten),
+  ),
+  white: (
+    base: $white,
+    dark: darken($white, $darken),
+  ),
 );
 
 @function clr($base, $shade: base) {

@@ -8,7 +8,7 @@ function Playlist({ songs, handleChangeSong }) {
         {songs.map((song, index) => {
           return (
             <li key={song.id} id={song.index} onClick={() => handleChangeSong(index)}>
-              {song.genre} -{song.artist} - {song.title}
+              {song.artist} - {song.title}
             </li>
           );
         })}

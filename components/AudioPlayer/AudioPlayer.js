@@ -48,6 +48,7 @@ function AudioPlayer({ songs, isPlaying, setIsPlaying, songIndex, handleChangeSo
     );
     setVolumeValue(audioPlayerRef.current.volume * 100);
   };
+  
   useEffect(() => {
     if (audioPlayerVolumeRef?.current) {
       audioPlayerVolumeRef.current.style.setProperty(

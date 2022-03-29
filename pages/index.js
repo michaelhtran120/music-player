@@ -7,7 +7,7 @@ import Playlist from '../components/Playlist/Playlist';
 
 import { server } from '../config/index';
 
-import styles from '../styles/Home.module.css';
+import styles from '../styles/Home.module.scss';
 
 export default function Home({ songs }) {
   const [songIndex, setSongIndex] = useState(0);
