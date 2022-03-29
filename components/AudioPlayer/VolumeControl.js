@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import styles from '../../styles/VolumeControl.module.scss';
+import styles from '../../styles/AudioPlayer/VolumeControl.module.scss';
 
 const VolumeControl = React.forwardRef((props, ref) => {
   const { value, handleRangeChange, isOpen, setIsOpen } = props;

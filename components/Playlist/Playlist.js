@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../../styles/Playlist.module.scss';
+import styles from '../../styles/Playlist/Playlist.module.scss';
 
 function Playlist({ songs, handleChangeSong, songIndex }) {
   return (

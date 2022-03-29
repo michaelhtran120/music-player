@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../../styles/ProgressBar.module.scss';
+import styles from '../../styles/AudioPlayer/ProgressBar.module.scss';
 import { calculateTime } from '../../Utils/calculateTime';
 
 const ProgressBar = React.forwardRef((props, ref) => {

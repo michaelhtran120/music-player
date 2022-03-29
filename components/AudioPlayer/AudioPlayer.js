@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import styles from '../../styles/AudioPlayer.module.scss';
+import styles from '../../styles/AudioPlayer/AudioPlayer.module.scss';
 
 import { BsPlay, BsPause, BsSkipBackward, BsSkipForward } from 'react-icons/bs';
 import ProgressBar from './ProgressBar';
