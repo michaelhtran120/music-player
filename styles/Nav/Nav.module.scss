@@ -4,9 +4,6 @@
   padding: 0 20px;
   color: $white;
   background-color: $black;
-  * {
-    color: $white;
-  }
   ul {
     padding: 0;
     margin: 0;
@@ -21,6 +18,17 @@
       &:hover {
         color: clr(primary, light);
       }
+      &:active {
+        color: clr(primary, light);
+      }
     }
+  }
+  .activeLink {
+    color: clr(primary, light);
+    text-decoration: underline;
+    
+  }
+  .inactiveLink {
+    color: $white;
   }
 }
