@@ -4,21 +4,24 @@
   left: 50%;
   top: 50%;
   transform: translateX(-50%) translateY(-50%);
-  background-color: clr(black, light);
-  height: auto;
+  // height: 200px;
   width: 350px;
-  padding: 10px;
   margin: 0 auto;
+  // overflow: scroll;
+  border: 1px solid $primary;
   ul {
     list-style-type: none;
     padding: 0 5px;
-    border: 1px solid $primary;
+    margin: 0;
     li {
-      padding: 10px 0px;
+      padding: 20px 10px;
       color: clr(white);
     }
     li:not(:last-child) {
       border-bottom: 1px solid $primary;
     }
+  }
+  .active {
+    color: clr(primary, light);
   }
 }

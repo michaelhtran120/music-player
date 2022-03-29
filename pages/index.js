@@ -30,7 +30,7 @@ export default function Home({ songs }) {
       </Head>
 
       <main className={styles.main}>
-        <Playlist songs={songs} handleChangeSong={changeSong} />
+        <Playlist songs={songs} handleChangeSong={changeSong} songIndex={songIndex} />
         <AudioPlayer
           songs={songs}
           songIndex={songIndex}

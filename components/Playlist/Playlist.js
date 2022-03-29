@@ -1,13 +1,18 @@
 import React from 'react';
 import styles from '../../styles/Playlist.module.scss';
 
-function Playlist({ songs, handleChangeSong }) {
+function Playlist({ songs, handleChangeSong, songIndex }) {
   return (
     <div className={styles.playlistWrapper}>
       <ul>
         {songs.map((song, index) => {
           return (
-            <li key={song.id} id={song.index} onClick={() => handleChangeSong(index)}>
+            <li
+              key={song.id}
+              id={song.id}
+              onClick={() => handleChangeSong(song.id)}
+              className={songIndex == song.id ? styles.active : ''}
+            >
               {song.artist} - {song.title}
             </li>
           );

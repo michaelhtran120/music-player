@@ -1,6 +1,6 @@
 export const musicData = [
   {
-    id: '1',
+    id: '0',
     title: 'Ars Gratia Artis',
     artist: 'CJ Trillo',
     genre: 'Hip Hop',
@@ -8,7 +8,7 @@ export const musicData = [
     duration: 237,
   },
   {
-    id: '2',
+    id: '1',
     title: 'Rock The Boat Remix',
     artist: 'Siik',
     genre: 'Hip Hop',
@@ -16,7 +16,7 @@ export const musicData = [
     duration: 276,
   },
   {
-    id: '3',
+    id: '2',
     title: 'End Of The Night Remix',
     artist: 'Louis Futon',
     genre: 'Electro Pop',
@@ -24,7 +24,7 @@ export const musicData = [
     duration: 220,
   },
   {
-    id: '4',
+    id: '3',
     title: 'Maiyu',
     artist: 'Fenech-Soler',
     genre: ' Indie Pop, Indietronica',
