@@ -3,6 +3,7 @@ import styles from '../../styles/AudioPlayer.module.scss';
 
 import { BsPlay, BsPause, BsSkipBackward, BsSkipForward } from 'react-icons/bs';
 import ProgressBar from './ProgressBar';
+import VolumeControl from './VolumeControl';
 
 function AudioPlayer({ songs, isPlaying, setIsPlaying, songIndex, handleChangeSong }) {
   // const [isPlaying, setIsPlaying] = useState(false);
@@ -48,7 +49,7 @@ function AudioPlayer({ songs, isPlaying, setIsPlaying, songIndex, handleChangeSo
     );
     setVolumeValue(audioPlayerRef.current.volume * 100);
   };
-  
+
   useEffect(() => {
     if (audioPlayerVolumeRef?.current) {
       audioPlayerVolumeRef.current.style.setProperty(
@@ -131,17 +132,13 @@ function AudioPlayer({ songs, isPlaying, setIsPlaying, songIndex, handleChangeSo
           totalTime={totalTime}
           ref={progressBarRef}
         />
-        <div className={styles.volumeWrapper}>
-          <button onClick={() => setIsVolumeOpen((prev) => !prev)}>Volume</button>
-          {isVolumeOpen ? (
-            <input
-              type='range'
-              ref={audioPlayerVolumeRef}
-              onChange={handleVolumeRangeChange}
-              value={volumeValue}
-            />
-          ) : null}
-        </div>
+        <VolumeControl
+          handleRangeChange={handleVolumeRangeChange}
+          ref={audioPlayerVolumeRef}
+          value={volumeValue}
+          isOpen={isVolumeOpen}
+          setIsOpen={() => setIsVolumeOpen((prev) => !prev)}
+        />
       </div>
     </>
   );
