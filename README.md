@@ -10,7 +10,7 @@ If you are the artist/producer of the track and would like things to be removed,
 
 ## Retrospect
 
-A part of this was building out an audio player from scratch, which I used some resources for reference. The area I had a hard time was getting the animation of the progress bar correct/adjusted for each song.
+A part of this was building out an audio player from scratch, which I used some resources for reference. The area I had a hard time was getting the animation of the progress bar correct/adjusted for each song. Also trying to figure out how to get the marquee animation working as well took a bit of trial and error.
 
 I also have been curious about the Next JS framework and I wanted to see how this framework can be used and how it can save time. Overall I feel like I had a introductory exposure to Next JS, but enjoy how it has a lot of tools included out of the box. 
 

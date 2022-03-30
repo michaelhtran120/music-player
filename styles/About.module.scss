@@ -8,13 +8,13 @@
   text-align: center;
 
   h1 {
-    margin-top: 50px;
+    margin: 50px 0px;
   }
   .textWrapper {
-    position: absolute;
-    left: 50%;
-    top: 50%;
+    margin: 0 auto;
     max-width: 525px;
-    transform: translatex(-50%) translateY(-50%);
+    @media screen and (max-width: 400px) {
+      max-width: 325px;
+    }
   }
 }
