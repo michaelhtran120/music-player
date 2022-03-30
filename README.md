@@ -1,34 +1,22 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# M's Music
 
-## Getting Started
+This is a music app where I can share some music not found on streaming platforms. I really have a deep love and appreciation for music and would love to share some of the music I have discovered over the years that is difficult to find.
 
-First, run the development server:
+The goal is to sift through my collection of music that I have accumulated over the years (prior to streaming), and updating the code base with new songs every so often.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+If you find the music here awesome and would like to discuss music with me, please reach out!
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+If you are the artist/producer of the track and would like things to be removed, please let me know. 
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Retrospect
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+A part of this was building out an audio player from scratch, which I used some resources for reference. The area I had a hard time was getting the animation of the progress bar correct/adjusted for each song.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+I also have been curious about the Next JS framework and I wanted to see how this framework can be used and how it can save time. Overall I feel like I had a introductory exposure to Next JS, but enjoy how it has a lot of tools included out of the box. 
 
-## Learn More
+Overall it was great React and Sass practice. It was awesome to try out the API feature as well as the integrated router.
 
-To learn more about Next.js, take a look at the following resources:
+## For Developers
+If you would like to play around with the code, feel free to clone the repository and you can type "npm run dev" to run in development mode.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+As of now I have no plans to really build this or expand this application as it solves the problem I had. (Plus it was fun to build out the audio player).
