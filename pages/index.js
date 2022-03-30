@@ -9,7 +9,42 @@ import { server } from '../config/index';
 
 import styles from '../styles/Home.module.scss';
 
-export default function Home({ songs }) {
+const songData = [
+  {
+    id: 0,
+    title: 'Ars Gratia Artis',
+    artist: 'CJ Trillo',
+    genre: 'Hip Hop',
+    driveId: '1f-D-QIbqzQN_TuNUNKpmpDY4gypkQmrZ',
+    duration: 237,
+  },
+  {
+    id: 1,
+    title: 'Rock The Boat Remix',
+    artist: 'Siik',
+    genre: 'Hip Hop',
+    driveId: '1gLeGhBeKfeX9K1d6VXs0igEEW64MZG_i',
+    duration: 276,
+  },
+  {
+    id: 2,
+    title: 'End Of The Night Remix',
+    artist: 'Louis Futon',
+    genre: 'Electro Pop',
+    driveId: '19X-GCcEvfo85yeME8oLLGoA9k8FslI5J',
+    duration: 220,
+  },
+  {
+    id: 3,
+    title: 'Maiyu',
+    artist: 'Fenech-Soler',
+    genre: ' Indie Pop, Indietronica',
+    driveId: '1Y8lIIbX3Kw_WNGBhb3h6OBfVp1thzDYZ',
+    duration: 341,
+  },
+];
+
+export default function Home() {
   const [songIndex, setSongIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -30,9 +65,9 @@ export default function Home({ songs }) {
       </Head>
 
       <main className={styles.main}>
-        <Playlist songs={songs} handleChangeSong={changeSong} songIndex={songIndex} />
+        <Playlist songs={songData} handleChangeSong={changeSong} songIndex={songIndex} />
         <AudioPlayer
-          songs={songs}
+          songs={songData}
           songIndex={songIndex}
           handleChangeSong={setSongIndex}
           isPlaying={isPlaying}
@@ -43,20 +78,19 @@ export default function Home({ songs }) {
   );
 }
 
-export async function getStaticProps() {
-  const res = await fetch(`${server}/api/songs`);
-  const songs = await res.json();
+// export async function getStaticProps() {
+//   const res = await fetch(`${server}/api/songs`);
+//   const songs = await res.json();
 
+//   if (songs) {
+//     return {
+//       props: {
+//         songs: songs,
+//       },
+//     };
+//   }
 
-  if (songs) {
-    return {
-      props: {
-        songs: songs,
-      },
-    };
-  }
-
-  return {
-    props: {},
-  };
-}
+//   return {
+//     props: {},
+//   };
+// }
