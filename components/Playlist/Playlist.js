@@ -5,7 +5,7 @@ function Playlist({ songs, handleChangeSong, songIndex }) {
   return (
     <div className={styles.playlistWrapper}>
       <ul>
-        {songs.map((song, index) => {
+        {songs.map((song) => {
           return (
             <li
               key={song.id}

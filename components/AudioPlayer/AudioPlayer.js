@@ -18,11 +18,19 @@ function AudioPlayer({ songs, isPlaying, setIsPlaying, songIndex, handleChangeSo
   const audioPlayerVolumeRef = useRef();
   const firstUpdate = useRef(true);
 
-  const handlePlayPause = () => {
+  const handlePlayPause = useCallback(() => {
     setIsPlaying((prevValue) => !prevValue);
-  };
+  }, [setIsPlaying]);
 
-  const nextSong = () => {
+  const changePlayerCurrentTime = useCallback(() => {
+    progressBarRef.current.style.setProperty(
+      '--progressWidth',
+      `${Math.ceil((progressBarRef.current.value / totalTime) * 100)}%`,
+    );
+    setCurrentTime(progressBarRef.current.value);
+  }, [totalTime]);
+
+  const nextSong = useCallback(() => {
     handleChangeSong((prev) => {
       if (prev === songs.length - 1) {
         return 0;
@@ -34,7 +42,7 @@ function AudioPlayer({ songs, isPlaying, setIsPlaying, songIndex, handleChangeSo
     if (!isPlaying) {
       handlePlayPause();
     }
-  };
+  }, [changePlayerCurrentTime, handleChangeSong, handlePlayPause, isPlaying, songs]);
 
   const handleProgressRangeChange = () => {
     audioPlayerRef.current.currentTime = progressBarRef.current.value;
@@ -59,21 +67,13 @@ function AudioPlayer({ songs, isPlaying, setIsPlaying, songIndex, handleChangeSo
     }
   }, [isVolumeOpen]);
 
-  const changePlayerCurrentTime = useCallback(() => {
-    progressBarRef.current.style.setProperty(
-      '--progressWidth',
-      `${Math.ceil((progressBarRef.current.value / totalTime) * 100)}%`,
-    );
-    setCurrentTime(progressBarRef.current.value);
-  }, [totalTime]);
-
-  const whilePlaying = () => {
+  const whilePlaying = useCallback(() => {
     if (audioPlayerRef.current !== null && isPlaying) {
       progressBarRef.current.value = audioPlayerRef.current.currentTime;
       changePlayerCurrentTime();
       animationRef.current = requestAnimationFrame(whilePlaying);
     }
-  };
+  }, [changePlayerCurrentTime, isPlaying]);
 
   useEffect(() => {
     if (isPlaying) {
@@ -87,18 +87,18 @@ function AudioPlayer({ songs, isPlaying, setIsPlaying, songIndex, handleChangeSo
   }, [isPlaying, whilePlaying]);
 
   useEffect(() => {
-    const seconds = Math.floor(songs[songIndex].duration);
+    const seconds = Math.floor(songs[songIndex]?.duration);
     setTotalTime(seconds);
 
     // setting max of the input range.
     progressBarRef.current.max = seconds;
-  }, [songIndex]);
+  }, [songIndex, songs]);
 
   useEffect(() => {
     if (currentTime == totalTime && !firstUpdate.current) {
       nextSong();
     }
-  }, [currentTime, totalTime]);
+  }, [currentTime, totalTime, nextSong]);
 
   return (
     <>
