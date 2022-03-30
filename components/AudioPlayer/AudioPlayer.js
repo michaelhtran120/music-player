@@ -44,6 +44,16 @@ function AudioPlayer({ songs, isPlaying, setIsPlaying, songIndex, handleChangeSo
     }
   }, [changePlayerCurrentTime, handleChangeSong, handlePlayPause, isPlaying, songs]);
 
+  const prevSong = () => {
+    handleChangeSong((prev) => {
+      if (prev === 0) {
+        return songs.length - 1;
+      } else {
+        return prev - 1;
+      }
+    });
+  };
+
   const handleProgressRangeChange = () => {
     audioPlayerRef.current.currentTime = progressBarRef.current.value;
     changePlayerCurrentTime();
@@ -117,7 +127,7 @@ function AudioPlayer({ songs, isPlaying, setIsPlaying, songIndex, handleChangeSo
 
         <div className={styles.audioController}>
           <button className={styles.backwardButton}>
-            <BsSkipBackward />
+            <BsSkipBackward onClick={prevSong} />
           </button>
           <button onClick={handlePlayPause} className={styles.playPauseButton}>
             {isPlaying ? <BsPause /> : <BsPlay />}
