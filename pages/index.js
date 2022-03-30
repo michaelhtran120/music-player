@@ -46,7 +46,7 @@ export default function Home({ songs }) {
 export async function getStaticProps() {
   const res = await fetch(`${server}/api/songs`);
   const songs = await res.json();
-  console.log(songs);
+
 
   if (songs) {
     return {

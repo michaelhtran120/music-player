@@ -5,7 +5,7 @@ import styles from '../../styles/Nav/Nav.module.scss';
 
 const Nav = () => {
   const router = useRouter();
-  console.log(router.pathname);
+
   return (
     <nav className={styles.nav}>
       <ul>

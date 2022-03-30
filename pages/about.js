@@ -20,9 +20,9 @@ function about() {
           <br />I really enjoyed the process of building out a audio player from scratch. Required
           assistance from several resources to help build out the progress bar animation ( the use
           of requestAnimationFrame), but digging for the audio meta data and figuring out how to
-          utilize input type='range' to really control audio and volume was interesting.
+          utilize input type='range' to really control audio and volume was interesting. Also wanted to try out using NextJS React framework.
           <br />
-          <br />I am by no means an audiophile, but I do love music in my own way and the impact is
+          <br />I am by no means an audiophile, but I do love music in my own way and the impact it
           has had on my life. If you like any of these tracks that I share here or if you would like
           to talk about music, please reach out!
         </div>
